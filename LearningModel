@@ -124,8 +124,8 @@ class Predictor(CustomFactor):
         x = pd.concat([df.stack(dropna=False) for df in inputs.values()], axis=1).fillna(0)
         
         ## Run Model
-        #model = GaussianNB()
-        model =  linear_model.RidgeClassifier()
+       
+        model =  linear_model.Lasso(alpha=0.1)
         
         model_x = x[:-num_secs*(num_holding_days)]
         
