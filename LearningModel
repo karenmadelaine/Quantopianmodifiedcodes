@@ -27,6 +27,8 @@ from quantopian.pipeline.factors import Returns
 import pandas as pd
 import numpy as np
  
+# SKLearn :)
+#from sklearn.naive_bayes import GaussianNB
 from sklearn import linear_model
 
 ##################################################
@@ -79,7 +81,6 @@ class Predictor(CustomFactor):
               ('Asset_Growth_15d' , Returns(window_length=15)),
               ('Asset_Growth_10d' , Returns(window_length=10)),
               ('Asset_Growth_20d' , Returns(window_length=20)),
-              ('Return' , Returns(inputs=[USEquityPricing.open],window_length=5)),
               ('Return' , Returns(inputs=[USEquityPricing.close],window_length=5))
               ])
  
@@ -123,7 +124,7 @@ class Predictor(CustomFactor):
         x = pd.concat([df.stack(dropna=False) for df in inputs.values()], axis=1).fillna(0)
         
         ## Run Model
-
+        #model = GaussianNB()
         model =  linear_model.RidgeClassifier()
         
         model_x = x[:-num_secs*(num_holding_days)]
